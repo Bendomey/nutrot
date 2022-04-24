@@ -42,7 +42,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
                         color: "#fff",
                       }}
                     >
-                      Confirm
+                      Confirm Image
                     </Text>
                     <Ionicons
                       name="ios-checkmark-circle"

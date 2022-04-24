@@ -10,6 +10,7 @@ import { Camera } from "expo-camera";
 import { RFValue } from "react-native-responsive-fontsize";
 import Feather from "@expo/vector-icons/Feather";
 import ConfirmPhoto from "./submit-photo";
+import Instruction from "./instruction";
 import * as Location from "expo-location";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
   const [photoUri, setPhotoUri] = React.useState(null);
   const [location, setLocation] = React.useState(null);
   const [showPhoto, setShowPhoto] = React.useState(false);
+  const [showInstruction, setShowInstruction] = React.useState(false);
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -148,6 +150,10 @@ export default function App() {
         photo={photoUri}
         location={location}
       />
+      <Instruction
+       showModal={showInstruction}
+       setshowModal={setShowInstruction}
+       />
     </View>
   );
 }
