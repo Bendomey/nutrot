@@ -119,16 +119,12 @@ export default function App() {
                     />
                     <TouchableOpacity
                       onPress={() => {
-                        setType(
-                          type === Camera.Constants.Type.back
-                            ? Camera.Constants.Type.front
-                            : Camera.Constants.Type.back
-                        );
+                        setShowInstruction(true);
                       }}
                       style={{ marginLeft: RFValue(30) }}
                     >
                       <Feather
-                        name={"repeat"}
+                        name={"info"}
                         color={"#fff"}
                         size={RFValue(20)}
                       />
@@ -151,9 +147,9 @@ export default function App() {
         location={location}
       />
       <Instruction
-       showModal={showInstruction}
-       setshowModal={setShowInstruction}
-       />
+        showModal={showInstruction}
+        setshowModal={setShowInstruction}
+      />
     </View>
   );
 }

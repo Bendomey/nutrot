@@ -1,47 +1,54 @@
-import React, { useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import React, { useState } from "react";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  SafeAreaView,
+} from "react-native";
 
-const App = ({showModal, setshowModal}) => {
+const App = ({ showModal, setshowModal }) => {
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setshowModal(!showModal);
-        }}>
-        <View style={styles.centeredView}>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={showModal}
+      onRequestClose={() => {
+        Alert.alert("Modal has been closed.");
+        setshowModal(!showModal);
+      }}
+    >
+      <View style={styles.centeredView}>
+        <SafeAreaView>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Hello World!</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setshowModal(!showModal)}>
+              onPress={() => setshowModal(!showModal)}
+            >
               <Text style={styles.textStyle}>Hide</Text>
             </Pressable>
           </View>
-        </View>
-      </Modal>
-      <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setshowModal(true)}>
-        <Text style={styles.textStyle}>View Instructions</Text>
-      </Pressable>
-    </View>
+        </SafeAreaView>
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   centeredView: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
+    backgroundColor: "#fff",
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -54,23 +61,21 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 14,
     elevation: 4,
-  
-    
   },
   buttonOpen: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
   },
   buttonClose: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
