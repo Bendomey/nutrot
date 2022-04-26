@@ -59,8 +59,8 @@ export default function App() {
     try {
       setIsLoading(true);
       let photo = await cameraRef.current.takePictureAsync();
-      // let location = await Location.getCurrentPositionAsync({});
-      // setLocation(location);
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
       setPhotoUri(photo);
       setShowPhoto(true);
       setIsLoading(false);
