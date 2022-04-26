@@ -56,13 +56,17 @@ export default function App() {
   const isFlashOn = Camera.Constants.FlashMode.on === flashMode;
 
   const onTakePhoto = async () => {
-    setIsLoading(true);
-    let photo = await cameraRef.current.takePictureAsync();
-    let location = await Location.getCurrentPositionAsync({});
-    setLocation(location);
-    setPhotoUri(photo);
-    setShowPhoto(true);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      let photo = await cameraRef.current.takePictureAsync();
+      // let location = await Location.getCurrentPositionAsync({});
+      // setLocation(location);
+      setPhotoUri(photo);
+      setShowPhoto(true);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

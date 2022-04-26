@@ -7,12 +7,48 @@ import {
   SafeAreaView,
   View,
   TouchableOpacity,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { ResultModal } from "./results";
 
 const ConfirmPhoto = ({ show, setShow, photo }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isOpened, setIsOpened] = React.useState(false);
+
+  const requestSubmission = React.useCallback(() => {
+    Alert.alert(
+      "Confirm",
+      "Are you sure you want to submit this?",
+      [
+        {
+          text: "No",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Yes!",
+          onPress: () => setIsLoading(true),
+        },
+      ],
+      { cancelable: false }
+    );
+  }, []);
+
+  React.useEffect(() => {
+    let timeout;
+    if (isLoading) {
+      timeout = setTimeout(() => {
+        setIsOpened(true);
+        setIsLoading(false);
+      }, 1000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isLoading]);
   return (
     <>
       <Modal visible={show} animationType="fade" style={{ flex: 1 }}>
@@ -32,28 +68,56 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity
+                  onPress={requestSubmission}
+                  activeOpacity={0.7}
+                >
                   <View style={styles.button}>
-                    <Text
-                      style={{
-                        fontSize: RFValue(15),
-                        fontWeight: "700",
-                        marginRight: RFValue(10),
-                        color: "#fff",
-                      }}
-                    >
-                      Confirm Image
-                    </Text>
-                    <Ionicons
-                      name="ios-checkmark-circle"
-                      color="#fff"
-                      size={RFValue(15)}
-                    />
+                    {isLoading ? (
+                      <>
+                        <Text
+                          style={{
+                            fontSize: RFValue(15),
+                            fontWeight: "700",
+                            marginRight: RFValue(10),
+                            color: "#fff",
+                          }}
+                        >
+                          submitting...
+                        </Text>
+                        <ActivityIndicator />
+                      </>
+                    ) : (
+                      <>
+                        <Text
+                          style={{
+                            fontSize: RFValue(15),
+                            fontWeight: "700",
+                            marginRight: RFValue(10),
+                            color: "#fff",
+                          }}
+                        >
+                          Confirm Image
+                        </Text>
+                        <Ionicons
+                          name="ios-checkmark-circle"
+                          color="#fff"
+                          size={RFValue(15)}
+                        />
+                      </>
+                    )}
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
           </SafeAreaView>
+          <ResultModal
+            show={isOpened}
+            onClose={() => {
+              setIsOpened(false);
+              setShow();
+            }}
+          />
         </ImageBackground>
       </Modal>
     </>
