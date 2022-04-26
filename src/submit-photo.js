@@ -21,8 +21,8 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
 
   const requestSubmission = React.useCallback(() => {
     Alert.alert(
-      "Confirm",
-      "Are you sure you want to submit this?",
+      "Uploading...",
+      "Are you sure you want to upload this?",
       [
         {
           text: "No",
@@ -97,7 +97,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
                             color: "#fff",
                           }}
                         >
-                          Confirm Image
+                          Generate pH
                         </Text>
                         <Ionicons
                           name="ios-checkmark-circle"
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: "green",
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: RFValue(18),

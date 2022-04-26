@@ -95,6 +95,9 @@ export default function App() {
                     <Text style={{ color: "#fff", marginTop: RFValue(10) }}>
                       Processing...
                     </Text>
+                    <Text style={{ color: "#fff", marginTop: RFValue(10) }}>
+                      Hold the phone still for better capturing!
+                    </Text>
                   </View>
                 ) : null}
               </View>

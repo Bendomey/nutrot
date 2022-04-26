@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RFValue } from "react-native-responsive-fontsize";
 import {
   Alert,
   Modal,
@@ -8,6 +9,7 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
+import List from './list';
 
 const App = ({ showModal, setshowModal }) => {
   return (
@@ -23,7 +25,7 @@ const App = ({ showModal, setshowModal }) => {
       <View style={styles.centeredView}>
         <SafeAreaView>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+          <List/>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setshowModal(!showModal)}
@@ -66,7 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
   },
   buttonClose: {
-    backgroundColor: "red",
+    backgroundColor: "blue",
+    padding: 20
   },
   textStyle: {
     color: "white",
