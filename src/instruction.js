@@ -9,7 +9,8 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import List from './list';
+import List from './InstructionList';
+import About from './about';
 
 const App = ({ showModal, setshowModal }) => {
   return (
@@ -26,11 +27,12 @@ const App = ({ showModal, setshowModal }) => {
         <SafeAreaView>
           <View style={styles.modalView}>
           <List/>
+          <About/>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setshowModal(!showModal)}
             >
-              <Text style={styles.textStyle}>Hide</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </Pressable>
           </View>
         </SafeAreaView>
@@ -68,8 +70,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
   },
   buttonClose: {
-    backgroundColor: "blue",
-    padding: 20
+    elevation:8,
+    backgroundColor: "red",
+    borderRadius: 10,
+    paddingVertical:10,
+    paddingHorizontal:12
   },
   textStyle: {
     color: "white",
