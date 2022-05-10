@@ -19,6 +19,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
   let ress = 0.5
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOpened, setIsOpened] = React.useState(false);
+  const [response, setResponse] = React.useState(false);
 
   //added function 
   serverPost =async ()=>{
@@ -38,8 +39,10 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
         method: 'POST',
         body: data
       });
-      const responseJson = await response.text();
+      const responseJson = await response.json();
       console.log(responseJson)
+      setResponse(responseJson.ph)
+      setIsOpened(true)
     } catch (error) {
       return console.log(error);
     }
@@ -145,7 +148,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
           </SafeAreaView>
           <ResultModal
             show={isOpened}
-            phValue={ress}
+            phValue={response}
             onClose={() => {
               setIsOpened(false);
               setShow();
