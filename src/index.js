@@ -53,6 +53,7 @@ export default function App() {
   }
 
   console.log(location);
+  //console.log(photoUri)
   const isFlashOn = Camera.Constants.FlashMode.on === flashMode;
 
   const onTakePhoto = async () => {

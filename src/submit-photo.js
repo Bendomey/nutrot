@@ -16,10 +16,41 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { ResultModal } from "./results";
 
 const ConfirmPhoto = ({ show, setShow, photo }) => {
+  let ress = 0.5
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOpened, setIsOpened] = React.useState(false);
 
-  const requestSubmission = React.useCallback(() => {
+  //added function 
+  serverPost =async ()=>{
+    
+    var data = new FormData();
+    data.append('file',{
+      uri: photo.uri,
+      type: 'image/jpg',
+      name:'photo.jpg'
+    })
+ try {
+      const response = await fetch('http://35.239.135.105/', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        },
+        method: 'POST',
+        body: data
+      });
+      const responseJson = await response.text();
+      console.log(responseJson)
+    } catch (error) {
+      return console.log(error);
+    }
+    
+  }
+
+  const requestSubmission =() => {
+
+    // sending image to server using fetch 
+    serverPost()
+   
     Alert.alert(
       "Uploading...",
       "Are you sure you want to upload this?",
@@ -36,7 +67,8 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
       ],
       { cancelable: false }
     );
-  }, []);
+   
+  };
 
   React.useEffect(() => {
     let timeout;
@@ -113,6 +145,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
           </SafeAreaView>
           <ResultModal
             show={isOpened}
+            phValue={ress}
             onClose={() => {
               setIsOpened(false);
               setShow();

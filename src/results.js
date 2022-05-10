@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button } from "react-native";
 
 import Modal from "react-native-modal";
 
-export function ResultModal({ show, onClose }) {
+export function ResultModal({ show, onClose, phValue }) {
   return (
     <Modal
       testID={"modal"}
@@ -19,7 +19,7 @@ export function ResultModal({ show, onClose }) {
     >
       <View style={styles.content}>
         <Text style={styles.contentTitle}>
-          The pH concentration of this image is 4.5
+          The pH concentration of this image is {phValue}
         </Text>
 
         <Button testID={"close-button"} onPress={onClose} title="Okay" />

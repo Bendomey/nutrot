@@ -19,7 +19,7 @@ const App = ({ showModal, setshowModal }) => {
       transparent={true}
       visible={showModal}
       onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
+        console.log("Modal has been closed.");
         setshowModal(!showModal);
       }}
     >
