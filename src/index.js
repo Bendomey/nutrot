@@ -52,9 +52,9 @@ export default function App() {
     return <Text>No access to camera</Text>;
   }
 
-  console.log(location);
+  //console.log(location);
   //console.log(photoUri)
-  const isFlashOn = Camera.Constants.FlashMode.on === flashMode;
+  const isFlashOn = Camera.Constants.FlashMode.off === flashMode;
 
   const onTakePhoto = async () => {
     try {
@@ -94,11 +94,8 @@ export default function App() {
                   <View
                     style={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    <Text style={{ color: "#fff", marginTop: RFValue(10) }}>
+                    <Text style={{ color: "#fff", marginTop: RFValue(10), fontWeight:'bold' }}>
                       Processing...
-                    </Text>
-                    <Text style={{ color: "#fff", marginTop: RFValue(10) }}>
-                      Hold the phone still for better capturing!
                     </Text>
                   </View>
                 ) : null}

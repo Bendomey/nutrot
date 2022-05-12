@@ -29,8 +29,8 @@ export default function InstructionList() {
         <Text style={styles.info}>3. Make a study hand when capturing.</Text>
         <Text></Text>
         <Text></Text>
-        <Text style={styles.info}>4. Make sure the squre overlay is directly on </Text>
-        <Text style={styles.info}>    the color change area of the litmus paper</Text>
+        <Text style={styles.info}>4. Make sure internet connectivity is on </Text>
+        <Text></Text>
         <Text></Text>
         <Text></Text>
         </Modal.Body>

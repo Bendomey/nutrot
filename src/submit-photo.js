@@ -17,12 +17,14 @@ import { ResultModal } from "./results";
 
 const ConfirmPhoto = ({ show, setShow, photo }) => {
   let ress = 0.5
-  const [isLoading, setIsLoading] = React.useState(false);
+ //const [isLoading, setIsLoading] = React.useState(false);
   const [isOpened, setIsOpened] = React.useState(false);
   const [response, setResponse] = React.useState(false);
+  const [Loading, setLoading] = React.useState(false);
 
   //added function 
   serverPost =async ()=>{
+    console.log(photo.uri)
     
     var data = new FormData();
     data.append('file',{
@@ -31,28 +33,30 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
       name:'photo.jpg'
     })
  try {
+      setLoading(true)
       const response = await fetch('http://35.239.135.105/', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         },
         method: 'POST',
-        body: data
-      });
+        body: data,
+      })
       const responseJson = await response.json();
       console.log(responseJson)
       setResponse(responseJson.ph)
       setIsOpened(true)
     } catch (error) {
       return console.log(error);
-    }
+    } 
+    finally{ setLoading(false)}
     
   }
 
   const requestSubmission =() => {
 
     // sending image to server using fetch 
-    serverPost()
+  
    
     Alert.alert(
       "Uploading...",
@@ -65,7 +69,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
         },
         {
           text: "Yes!",
-          onPress: () => setIsLoading(true),
+          onPress: () =>   serverPost(),
         },
       ],
       { cancelable: false }
@@ -73,17 +77,17 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
    
   };
 
-  React.useEffect(() => {
-    let timeout;
-    if (isLoading) {
-      timeout = setTimeout(() => {
-        setIsOpened(true);
-        setIsLoading(false);
-      }, 1000);
-    }
+  // React.useEffect(() => {
+  //   let timeout;
+  //   if (isLoading) {
+  //     timeout = setTimeout(() => {
+  //       setIsOpened(true);
+  //       setIsLoading(false);
+  //     }, 1000);
+  //   }
 
-    return () => clearTimeout(timeout);
-  }, [isLoading]);
+  //   return () => clearTimeout(timeout);
+  // }, [isLoading]);
   return (
     <>
       <Modal visible={show} animationType="fade" style={{ flex: 1 }}>
@@ -108,7 +112,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
                   activeOpacity={0.7}
                 >
                   <View style={styles.button}>
-                    {isLoading ? (
+                    {Loading ? (
                       <>
                         <Text
                           style={{
@@ -118,7 +122,7 @@ const ConfirmPhoto = ({ show, setShow, photo }) => {
                             color: "#fff",
                           }}
                         >
-                          submitting...
+                          generating... This may take some time
                         </Text>
                         <ActivityIndicator />
                       </>
